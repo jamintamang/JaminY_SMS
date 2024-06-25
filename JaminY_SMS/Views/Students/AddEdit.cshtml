@@ -1,27 +1,27 @@
 ﻿@model JaminY_SMS.Models.Student
-<div class="container">
+<div class="container mt-5">
     @{
         ViewData["Title"] = Model.Id > 0 ? "Update Student" : "Add Student";
     }
-    <h1 class="mb-4"><b>@(Model.Id > 0 ? "Edit" : "Create") Student Information</b></h1>
+    <h1 class="mb-4 text-center"><b>@(Model.Id > 0 ? "Edit" : "Create") Student Information</b></h1>
 
     <form method="post" asp-action="AddEdit" enctype="multipart/form-data" class="needs-validation" novalidate>
         <input asp-for="Id" hidden />
 
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label asp-for="Name" class="form-label"></label>
-                            <input asp-for="Name" class="form-control" />
+                            <label asp-for="Name" class="form-label">Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter student name" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" type="email" />
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="Enter student email" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
@@ -30,15 +30,15 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label asp-for="PhoneNumber" class="form-label"></label>
-                            <input asp-for="PhoneNumber" class="form-control" />
+                            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label asp-for="Address" class="form-label"></label>
-                            <input asp-for="Address" class="form-control" />
+                            <label asp-for="Address" class="form-label">Address</label>
+                            <input asp-for="Address" class="form-control" placeholder="Enter address" />
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                     </div>
@@ -47,18 +47,18 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label class="form-label" asp-for="CourseId">Course</label>
-                            <select asp-for="CourseId" id="CourseId" class="form-control" asp-items="@(new SelectList(ViewBag.Courses,"Id","CourseName"))">
-                                <option value="null" selected disabled>-Please Select-</option>
+                            <label asp-for="CourseId" class="form-label">Course</label>
+                            <select asp-for="CourseId" id="CourseId" class="form-select" asp-items="@(new SelectList(ViewBag.Courses, "Id", "CourseName"))">
+                                <option value="" disabled selected>-Please Select-</option>
                             </select>
-                            <span class="text-danger" asp-validation-for="CourseId"></span>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label asp-for="Section" class="form-label"></label>
-                            <select asp-for="Section" class="form-control" asp-items="ViewBag.Sections">
-                                <option value="null" class="select-placeholder">-Please select-</option>
+                            <label asp-for="Section" class="form-label">Section</label>
+                            <select asp-for="Section" class="form-select" asp-items="ViewBag.Sections">
+                                <option value="" disabled selected>-Please Select-</option>
                             </select>
                             <span asp-validation-for="Section" class="text-danger"></span>
                         </div>
@@ -68,8 +68,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label asp-for="Class" class="form-label"></label>
-                            <input asp-for="Class" class="form-control" />
+                            <label asp-for="Class" class="form-label">Class</label>
+                            <input asp-for="Class" class="form-control" placeholder="Enter class" />
                             <span asp-validation-for="Class" class="text-danger"></span>
                         </div>
                     </div>
@@ -78,17 +78,17 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label asp-for="Gender" class="form-label"></label>
+                            <label asp-for="Gender" class="form-label">Gender</label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" asp-for="Gender" value="Male" class="form-check-input" required />
+                                <input type="radio" asp-for="Gender" value="Male" class="form-check-input" />
                                 <label class="form-check-label">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" asp-for="Gender" value="Female" class="form-check-input" required />
+                                <input type="radio" asp-for="Gender" value="Female" class="form-check-input" />
                                 <label class="form-check-label">Female</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" asp-for="Gender" value="Other" class="form-check-input" required />
+                                <input type="radio" asp-for="Gender" value="Other" class="form-check-input" />
                                 <label class="form-check-label">Other</label>
                             </div>
                             <span asp-validation-for="Gender" class="text-danger"></span>
@@ -111,15 +111,15 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-2 text-center">
                 <div class="image-uploaded mb-3">
                     @if (!string.IsNullOrEmpty(Model?.ImageUrl))
                     {
-                        <img src="/@Model.ImageUrl" id="userPhotos" class="img-thumbnail" style="height:200px;width:180px;">
+                        <img src="/@Model.ImageUrl" id="userPhoto" class="img-thumbnail" style="height:200px;width:180px;" alt="Student Photo">
                     }
                     else
                     {
-                        <img id="userPhoto" class="img-thumbnail" style="height:200px;width:180px;">
+                        <img id="userPhoto" class="img-thumbnail" style="height:200px;width:180px;" alt="Student Photo">
                     }
                 </div>
                 <div class="input-group">
@@ -134,12 +134,12 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col-md-6">
-                <button type="submit" class="btn btn-outline-primary float-end ">@((Model.Id > 0) ? "Update" : "Create")</button>
+                <button type="submit" class="btn btn-outline-primary w-100">@((Model.Id > 0) ? "Update" : "Create")</button>
             </div>
             <div class="col-md-6">
-                <a asp-action="Index" class="btn btn-outline-secondary float-start" asp-controller="Student">Back</a>
+                <a asp-action="Index" class="btn btn-outline-secondary w-100" asp-controller="Students">Back</a>
             </div>
         </div>
     </form>
@@ -152,11 +152,7 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    if ('@Model?.ImageUrl' == '') {
-                        $('#userPhoto').attr('src', e.target.result);
-                    } else {
-                        $('#userPhotos').attr('src', e.target.result);
-                    }
+                    $('#userPhoto').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }

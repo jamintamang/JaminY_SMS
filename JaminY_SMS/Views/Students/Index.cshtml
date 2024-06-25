@@ -3,8 +3,9 @@
     ViewData["Title"] = "Index";
 }
 <div class="col-12">
-
-    <a class="btn btn-outline-primary float-end" asp-action="AddEdit">Add Student</a>
+    <a class="btn btn-outline-primary float-end" asp-action="AddEdit">
+        <i class="fas fa-plus-circle"></i> Add Student
+    </a>
 </div>
 
 <div class="container">
@@ -21,7 +22,9 @@
                 <div class="input-group">
                     <input type="text" name="searchString" class="form-control rounded-pill me-sm-2"
                            placeholder="Search" value="@ViewData["CurrentFilter"]" />
-                    <button class="btn btn-outline-primary rounded-pill my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-outline-primary rounded-pill my-2 my-sm-0" type="submit">
+                        <i class="fas fa-search"></i> Search
+                    </button>
                 </div>
             </form>
         </div>
@@ -59,17 +62,17 @@
                             <td>
                                 <a class="btn btn-outline-primary btn-sm"
                                    asp-action="AddEdit" asp-route-id="@item.Id">
-                                    @* <i class="fa-regular fa-pen-to-square"></i> *@ Edit
+                                    <i class="fas fa-edit"></i> Edit
                                 </a>
                                 <a class="btn btn-outline-danger btn-sm"
                                    asp-action="Delete"
                                    onclick="return confirm('Are you sure you want to delete this student?')"
                                    asp-route-id="@item.Id">
-                                    @* <i class="fa-solid fa-user-slash"></i> *@ Delete
+                                    <i class="fa-solid fa-trash"></i> Delete
                                 </a>
                                 <a class="btn btn-outline-info btn-sm"
                                    asp-action="Details" asp-route-id="@item.Id">
-                                    Details@*  <i class="fa-solid fa-circle-info"></i> *@
+                                    <i class="fas fa-info-circle"></i> Details
                                 </a>
                             </td>
                         </tr>
@@ -79,4 +82,3 @@
         </div>
     </div>
 </div>
-
