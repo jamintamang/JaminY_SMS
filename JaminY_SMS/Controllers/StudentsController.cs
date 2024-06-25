@@ -2,6 +2,10 @@
 using JaminY_SMS.Repositories.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace JaminY_SMS.Controllers
 {
@@ -16,18 +20,30 @@ namespace JaminY_SMS.Controllers
             _studentRepository = studentRepository;
             _courseRepository = courseRepository;
         }
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string searchString)
         {
             ViewBag.Courses = await _courseRepository.GetAllAsync(p => p.IsActive == true);
 
             var students = await _studentRepository.GetAllAsync(p => p.IsActive == true);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)
+                                           || s.Email.Contains(searchString, StringComparison.OrdinalIgnoreCase)
+                                          || s.Section.Contains(searchString, StringComparison.OrdinalIgnoreCase)
+                                          || s.PhoneNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
             return View(students);
         }
 
         [HttpGet]
         public async Task<IActionResult> AddEdit(int id)
         {
-            ViewBag.Courses =await _courseRepository.GetAllAsync(p => p.IsActive == true);
+            ViewBag.Courses = await _courseRepository.GetAllAsync(p => p.IsActive == true);
             Student student = new Student();
             if (id > 0)
             {
@@ -42,14 +58,12 @@ namespace JaminY_SMS.Controllers
                 new SelectListItem { Value = "E", Text = "Section E" }
             };
             return View(student);
-
-           
         }
 
         [HttpPost]
         public async Task<IActionResult> AddEdit(Student student)
         {
-            ViewBag.Courses =await _courseRepository.GetAllAsync(p => p.IsActive == true);
+            ViewBag.Courses = await _courseRepository.GetAllAsync(p => p.IsActive == true);
 
             if (ModelState.IsValid)
             {
@@ -111,6 +125,7 @@ namespace JaminY_SMS.Controllers
             TempData["warning"] = "Please enter valid data";
             return View(student);
         }
+
         public async Task<IActionResult> Details(int id)
         {
             var studentInfo = await _studentRepository.GetAsync(id);
@@ -119,12 +134,11 @@ namespace JaminY_SMS.Controllers
             return View(studentInfo);
         }
 
-
-            public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var studentInfo = await _studentRepository.GetAsync(id);
             _studentRepository.Delete(studentInfo);
-            TempData["error"] = "Data Deleted Sucessfully";
+            TempData["error"] = "Data Deleted Successfully";
             return RedirectToAction("Index");
         }
     }
